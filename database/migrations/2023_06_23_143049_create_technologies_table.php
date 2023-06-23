@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
-            $table->string('name_tech')->uniqiue();
+            $table->string('name_technology')->uniqiue();
             $table->string('slug');
             $table->timestamps();
         });
