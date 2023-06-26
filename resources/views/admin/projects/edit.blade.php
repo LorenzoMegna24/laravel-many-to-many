@@ -71,6 +71,49 @@
             </div>
 
 
+            <div class="form-groups d-flex justify-content-between">
+                @foreach ($technologies as $elem)
+                    <div class="form-check @error('technologies') is-invalid @enderror">
+
+                        @if ( $errors->any() )
+                            
+                            <input class="form-check-input" 
+                            type="checkbox" 
+                            name="technologies[]"
+                            value="{{ $elem->id }}" 
+                            id="technology-{{ $elem->id }}"
+                            {{ in_array( $elem->id, old( 'technologies', [] ) ) ? 'checked' : '' }}>
+
+                        @else 
+
+                            {{-- prima volta che entro nella edit senza errori --}}
+                            <input class="form-check-input" 
+                            type="checkbox" 
+                            name="technologies[]"
+                            value="{{ $elem->id }}" 
+                            id="technology-{{ $elem->id }}"
+                            {{ ($project->technologies->contains($elem)) ? 'checked' : '' }}>
+                    
+                        @endif
+
+
+
+                        <label class="form-check-label" for="technology-{{ $elem->id }}">
+                            {{ $elem->name_technology }}
+                        </label>
+                    </div>
+                @endforeach
+
+                
+                @error('technologies')
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+
+
+
             {{-- <div class="form-group my-2">
                 <label class="form-label" for="">SLUG</label>
                 <input class="form-control" type="text" name="slug">

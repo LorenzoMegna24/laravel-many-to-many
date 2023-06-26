@@ -120,10 +120,10 @@ class ProjectController extends Controller
 
         $types = Type::all();
 
-        $types = Type::all();
+        $technologies = Technology::all();
 
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -165,6 +165,12 @@ class ProjectController extends Controller
         }
 
         $project->update($form_data);
+
+        //controllo tech aggiornati
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies);
+        }
+
         return redirect()->route('admin.projects.index')->with('success', "Hai modificato correttamente il progetto:$project->project_title ");
 
     }
