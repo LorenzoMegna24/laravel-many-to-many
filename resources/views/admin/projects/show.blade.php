@@ -15,5 +15,12 @@
       Type: {{$project->type->name_type}}
    </div>
    @endif
+   @if ($project->technologies)
+       @foreach ($project->technologies as $elem)
+           <div>
+            Technologies: {{$elem->name_technology}}
+           </div>
+       @endforeach
+   @endif
 
 @endsection
